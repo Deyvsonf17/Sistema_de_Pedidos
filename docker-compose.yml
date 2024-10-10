@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: pedido2
+    environment:
+      POSTGRES_USER: pedido2
+      POSTGRES_PASSWORD: pedido2
+      POSTGRES_DB: pedido2
+    ports:
+      - "5544:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -1,0 +1,594 @@
+
+
+/* Estilo da Navbar */
+.navbar {
+    background-color: #d2691e; /* Marrom claro */
+    width: 100%; /* Ocupa a largura total da tela */
+    padding: 10px 0;
+}
+
+/* Nome do restaurante com espaçamento maior */
+.navbar-brand {
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif; /* Fonte estilosa do Google Fonts */
+    font-weight: 700; /* Estilo mais forte */
+    font-size: 2em; /* Tamanho maior do nome */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 40px; /* Aumenta a distância entre o nome e o menu */
+    padding-left: 40px;  /* Aumenta a distância entre o nome e o logo */
+}
+
+.navbar-light .navbar-brand {
+    font-size: 23.7px;
+    color: yellow;
+}
+.navbar-light .navbar-brand:hover {
+    color: yellow;
+}
+
+.navbar-brand img {
+    height: 50px; /* Ajuste de altura para o logo pequeno */
+    margin-right: 10px;
+}
+
+/* Estilo dos itens do menu */
+.navbar-nav {
+    margin-left: auto; /* Empurra os itens do menu para o canto direito */
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 1.0em;
+    margin: 0 15px;
+    font-family: 'Poppins', sans-serif; /* Aplica a nova fonte nos links */
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #8b4513; /* Marrom escuro no hover */
+    color: #fff !important;
+    border-radius: 5px;
+}
+
+/* Layout responsivo - Mobile */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-brand {
+        font-size: 1.5em; /* Tamanho do texto ajustado para mobile */
+        padding-right: 20px; /* Ajuste de padding para mobile */
+        padding-left: 20px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.1em; /* Tamanho do menu reduzido em mobile */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo da seção de boas-vindas */
+.welcome-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f0e4d7; /* Cor suave de fundo */
+}
+
+.welcome-section h1 {
+    font-family: 'Poppins', sans-serif; /* Usar a mesma fonte do restante do site */
+    font-size: 2.5em;
+    color: #d2691e; /* Marrom claro */
+    margin-bottom: 20px;
+}
+
+.welcome-section p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    color: #333; /* Cor escura para contraste */
+    margin-bottom: 40px;
+}
+
+.order-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espaço entre os botões */
+}
+
+.order-options a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #d2691e; /* Mesma cor do menu de navegação */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.order-options a:hover {
+    background-color: #8b4513; /* Cor mais escura no hover */
+}
+
+/* Estilo responsivo para telas menores */
+@media (max-width: 768px) {
+    .order-options {
+        flex-direction: column;
+        gap: 15px; /* Menor espaçamento entre os botões em mobile */
+    }
+
+    .welcome-section h1 {
+        font-size: 2em; /* Ajuste no tamanho do texto para mobile */
+    }
+
+    .welcome-section p {
+        font-size: 1.1em;
+    }
+
+    .order-options a {
+        font-size: 1.1em; /* Tamanho dos botões menor em mobile */
+        padding: 10px;
+    }
+}
+
+.h1 {
+    font-size: 2.2em;
+    color: #d2691e; /* Laranja com tom mais elegante */
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-transform: uppercase; /* Texto em caixa alta */
+}
+
+/* Estilos para a tabela de Histórico de Pedidos */
+table {
+    width: 100%;
+    max-width: 1200px; /* Define um limite máximo de largura para telas grandes */
+    margin: 20px auto; /* Centraliza em telas grandes */
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+table thead {
+    background-color: #d2691e;
+    color: #ffffff;
+}
+
+table thead th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody td {
+    padding: 12px 15px;
+    font-size: 1em;
+    color: #333333;
+}
+
+table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+table tbody td strong {
+    color: #d2691e;
+}
+
+table tbody td:last-child {
+    font-weight: bold;
+}
+
+/* Centraliza a tabela em telas grandes */
+@media (min-width: 769px) {
+    table {
+        margin: 20px auto; /* Mantém a tabela centralizada em telas grandes */
+    }
+}
+
+/* Responsividade da tabela para telas pequenas */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    tbody td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    tbody td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    /* Alinhamento à esquerda em telas pequenas */
+    table {
+        margin: 20px 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos para o Status do Pedido Atual */
+.status-section {
+    max-width: 1200px;
+    margin: 30px auto; /* Centraliza em telas grandes */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-section h2 {
+    color: #d2691e;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+
+.status-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.status-section ul li {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+    color: #333;
+}
+
+.status-section ul li strong {
+    color: #d2691e;
+}
+
+/* Centralização da seção de status em telas grandes */
+@media (min-width: 769px) {
+    .status-section {
+        margin: 30px auto; /* Centraliza a seção em telas grandes */
+    }
+}
+
+/* Responsividade para o Status do Pedido em telas pequenas */
+@media (max-width: 768px) {
+    .status-section {
+        margin: 20px 0; /* Alinha à esquerda em telas pequenas */
+    }
+
+    .status-section ul li {
+        font-size: 1em;
+    }
+}
+
+
+
+/* Container geral para o bloco do status do pedido */
+.pedido-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #fffaf0; /* Fundo com tom suave de amarelo */
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Título principal */
+.pedido-container .h1 {
+    font-size: 2.2em;
+    color: #d2691e; /* Laranja com tom mais elegante */
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-transform: uppercase; /* Texto em caixa alta */
+}
+
+/* Bloco de detalhes do pedido */
+.pedido-detalhes {
+    background-color: #fff8e1; /* Fundo em amarelo bem suave */
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pedido-detalhes:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Título dos detalhes */
+.pedido-detalhes h2 {
+    font-size: 1.8em;
+    color: #d35400; /* Laranja escuro refinado */
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-align: left;
+}
+
+/* Lista de informações */
+.pedido-info {
+    list-style: none;
+    padding: 0;
+}
+
+/* Estilo dos itens da lista */
+.pedido-info li {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fdf2e9; /* Fundo com laranja bem suave */
+    border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+/* Alterar a cor de fundo ao passar o mouse nos itens */
+.pedido-info li:hover {
+    background-color: #ffebcc; /* Fundo mais destacado no hover */
+}
+
+/* Destaque para o status */
+.pedido-info li strong {
+    font-size: 1.2em;
+    color: #c0392b; /* Vermelho elegante para o status */
+}
+
+/* Indicadores visuais por status */
+.pedido-status-andamento {
+    background-color: #f39c12; /* Status em andamento em laranja */
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.pedido-status-concluido {
+    background-color: #27ae60; /* Status concluído em verde */
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.pedido-status-cancelado {
+    background-color: #e74c3c; /* Status cancelado em vermelho */
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Alterações em telas pequenas */
+@media (max-width: 768px) {
+    .pedido-container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+
+    .pedido-detalhes {
+        padding: 15px;
+    }
+
+    .pedido-info li {
+        font-size: 1em;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pedido-info li strong {
+        margin-top: 5px;
+    }
+}
+
+
+
+
+/* Estilo geral do formulário */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff8e1; /* Cor de fundo leve */
+    border: 1px solid #ffcc80; /* Borda suave */
+    border-radius: 12px; /* Borda arredondada */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #ff7043; /* Cor atraente */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Estilo para os rótulos */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ff8a65; /* Texto sutil em laranja */
+    font-size: 16px;
+}
+
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ffab91; /* Bordas com tom laranja suave */
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fff3e0; /* Fundo suave para inputs */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Efeito de foco nos inputs */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #ff7043;
+    background-color: #ffecb3;
+    box-shadow: 0 0 5px rgba(255, 112, 67, 0.5);
+}
+
+/* Estilo para selects */
+select {
+    cursor: pointer;
+}
+
+/* Estilo para checkbox */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Mostrar o campo de observação quando o checkbox for marcado */
+#observacao_div {
+    display: none;
+}
+
+#observacao {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ffab91;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fff3e0;
+}
+
+/* Estilos específicos para pedidos diferentes */
+#feijao_div_executivo,
+#feijao_div_galeto {
+    display: none;
+}
+
+/* Estilo para parágrafo de acompanhamentos */
+p {
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #ff7043;
+    font-style: italic;
+}
+
+/* Estilo para os botões */
+button[type="submit"] {
+    background-color: #ff7043; /* Laranja vivo */
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Efeito de hover para os botões */
+button[type="submit"]:hover {
+    background-color: #ff8a65;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); /* Efeito de leve "flutuação" */
+}
+
+/* Estilo especial para o botão 'Adicionar mais pedido' */
+button[name="adicionar_pedido"] {
+    background-color: #ffcc80;
+    color: #333;
+}
+
+button[name="adicionar_pedido"]:hover {
+    background-color: #ffe0b2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Adicionar observação */
+#observacao_div {
+    display: none;
+}
+
+/* Estilo para erros */
+input:invalid, select:invalid, textarea:invalid {
+    border-color: #ff1744; /* Vermelho vibrante para erro */
+}
+
+/* Layout responsivo */
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        margin: 10px 0;
+    }
+}

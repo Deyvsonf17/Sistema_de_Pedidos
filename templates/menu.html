@@ -1,0 +1,34 @@
+<!-- menu.html -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            Paty & Bola Petiscaria
+        </a>
+
+        <!-- Botão de Menu Hamburger para Mobile -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links do Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                </li>
+                {% if session['user_id'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/historico"><i class="fas fa-history"></i> Histórico de Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/status_pedido"><i class="fas fa-box"></i> Status do Pedido Atual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% if page == 'confirmacao_pagamento' %}
+        <!-- Seção de confirmação de pagamento -->
+        <h1>Pagamento Realizado</h1>
+        <p>{{ mensagem_confirmacao }}</p>
+
+        {% if forma_pagamento == 'dinheiro' and troco_para is not none %}
+            <p>O entregador levará troco para R$ {{ troco_para }}.</p>
+        {% endif %}
+
+        <p>Você pode acompanhar o status do pedido na aba 
+            <a class="nav-link" href="/status_pedido">"Status do Pedido Atual"</a>.
+        </p>
+
+    {% elif page == 'historico' %}
+        <!-- Seção de Histórico de Pedidos -->
+        <h1 class="h1">Histórico de Pedidos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo de Pedido</th>
+                    <th>Prato</th>
+                    <th>Quantidade</th>
+                    <th>Total (R$)</th>
+                    <th>Data do Pedido</th>
+                    <th>Forma de Pagamento</th>
+                    <th>Status</th>
+                    <th>Observações</th>  <!-- Coluna para observações -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                <tr>
+                    <td data-label="Tipo de Pedido">{{ pedido.tipo_pedido }}</td>
+                    <td>
+                        {% if pedido.tipo_pedido == 'Galeto' %}
+                            {% if pedido.tipo_galeto == 'meio' %} Meio Galeto
+                            {% elif pedido.tipo_galeto == 'completo' %} Galeto Completo
+                            {% elif pedido.tipo_galeto %} {{ pedido.tipo_galeto }}
+                            {% endif %}
+                            {% if pedido.feijao %} / Feijão {{ pedido.feijao }} {% endif %}
+                        {% else %}
+                            {% if pedido.carne %} {{ pedido.carne }} {% endif %}
+                            {% if pedido.feijao %} / Feijão {{ pedido.feijao }} {% endif %}
+                        {% endif %}
+                    </td>
+                    <td data-label="Quantidade">{{ pedido.quantidade }}</td>
+                    <td data-label="Total (R$)">R${{ pedido.total }}</td>
+                    <td data-label="Data do Pedido">{{ pedido.data_criacao.strftime('%d/%m/%Y %H:%M') }}</td>
+                    <td data-label="Forma de Pagamento">{{ pedido.forma_pagamento }}</td>
+                    <td data-label="Status">{{ pedido.status }}</td>
+                    <td>{% if pedido.observacao %} {{ pedido.observacao }} {% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% elif page == 'status_pedido' %}
+        <!-- Seção de Status do Pedido Atual -->
+        <div class="pedido-container">
+            <h1 class="h1">Status dos Pedidos</h1>
+
+            {% if pedidos and pedidos|length > 0 %}
+                {% for pedido in pedidos %}
+                <div class="pedido-detalhes">
+                    <h2 class="">Detalhes do Pedido</h2>
+                    <ul class="pedido-info">
+                        <li>Status do Pedido: <strong>{{ pedido.status }}</strong></li>
+                        <li>Tipo de Pedido: {{ pedido.tipo_pedido }} /
+                            {% if pedido.tipo_pedido == 'Galeto' %}
+                                {% if pedido.tipo_galeto == 'meio' %} Meio Galeto
+                                {% elif pedido.tipo_galeto == 'completo' %} Galeto Completo
+                                {% elif pedido.tipo_galeto %} {{ pedido.tipo_galeto }}
+                                {% endif %}
+                                {% if pedido.feijao %} / {{ pedido.feijao }} {% endif %}
+                            {% else %}
+                                {% if pedido.carne %} {{ pedido.carne }} {% endif %}
+                                {% if pedido.feijao %} / {{ pedido.feijao }} {% endif %}
+                            {% endif %}
+                        </li>
+                        <li>Quantidade: {{ pedido.quantidade }}</li>
+                        <li>Valor do Pedido: R$ {{ pedido.total - 5.00 }}</li>
+                        <li>Taxa de Entrega: R$ 5.00</li>
+                        <li>Total a Pagar: R$ {{ pedido.total }}</li>
+                        {% if pedido.observacao %}
+                        <b><li>Observação: {{ pedido.observacao }}</li></b>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum pedido em andamento.</p>
+            {% endif %}
+        </div>
+
+    {% endif %}
+    
+</body>
+</html>

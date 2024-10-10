@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Inclusão do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Bootstrap e FontAwesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Seu arquivo de estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <script src="{{ url_for('static', filename='galeto.js') }}" defer></script>
+    <title>Área do Cliente - Paty & Bola Petiscaria</title>
+</head>
+<body>
+
+    {% include 'menu.html' %}
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    {% if page == 'home' %}
+    <div class="welcome-section">
+        <h1>Bem-vindo à Paty & Bola Petiscaria!</h1>
+        <p>Estamos prontos para atender você com nossos deliciosos pratos. Escolha a opção que mais lhe agrada e faça seu pedido!</p>
+        
+        <div class="order-options">
+            <a href="/pedido?tipo=comercial" class="btn btn-primary">Fazer Pedido Comercial</a>
+            <a href="/pedido?tipo=executivo" class="btn btn-primary">Fazer Pedido Executivo</a>
+            <a href="/pedido?tipo=galeto" class="btn btn-primary">Fazer Pedido de Galeto</a>
+        </div>
+    </div>
+
+    {% elif page == 'pedido' %}
+    <form action="" method="POST">
+        <h1>Fazer Pedido - {{ tipo_pedido }}</h1>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade" id="quantidade" min="1" value="1" required>
+
+        {% if tipo_pedido == 'comercial' %}
+        <!-- Carne é obrigatória no pedido Comercial -->
+        <label for="carne">Selecione a Carne:</label>
+        <select name="carne" id="carne" required>
+            <option value="" selected disabled>Selecione a carne</option>
+            <option value="Frango">Frango</option>
+            <option value="Bovina">Bovina</option>
+            <option value="Suína">Suína</option>
+        </select>
+
+        <!-- Feijão é obrigatório no pedido Comercial -->
+        <label for="feijao">Selecione o Feijão:</label>
+        <select name="feijao" id="feijao" required>
+            <option value="" selected disabled>Selecione o feijão</option>
+            <option value="Preto">Feijão Preto</option>
+            <option value="Carioca">Feijão Carioca</option>
+        </select>
+
+        <p>Acompanhamentos: arroz, macarrão, purê, vinagrete, farofa, legumes. (Obs: caso o purê acabe, será substituído por batata frita.)</p>
+
+        {% elif tipo_pedido == 'executivo' %}
+        <label for="prato_executivo">Selecione o Prato Executivo:</label>
+        <select name="prato_executivo" id="prato_executivo" required>
+            <option value="" selected disabled>Selecione o prato</option>
+            <option value="pernil_suino">Pernil suíno na chapa - R$ 30,00</option>
+            <option value="file_bode">Filé de bode na chapa - R$ 32,00</option>
+            <option value="carne_sol">Carne de sol na chapa - R$ 30,00</option>
+            <option value="maminha">Maminha na chapa - R$ 30,00</option>
+            <option value="picanha_suina">Picanha suína na chapa - R$ 32,00</option>
+            <option value="carneiro">Carneiro na chapa - R$ 32,00</option>
+            <option value="picanha_nacional">Picanha nacional - R$ 32,00</option>
+            <option value="parmegiana_camarao">Parmegiana de camarão - R$ 30,00</option>
+            <option value="parmegiana_carne">Parmegiana de carne - R$ 25,00</option>
+            <option value="parmegiana_frango">Parmegiana de frango - R$ 23,00</option>
+        </select>
+
+        <!-- O feijão é obrigatório exceto para pratos de parmegiana -->
+        <div id="feijao_div_executivo">
+            <label for="feijao">Selecione o Feijão:</label>
+            <select name="feijao" id="feijao_executivo" required>
+                <option value="" selected disabled>Selecione o feijão</option>
+                <option value="Preto">Feijão Preto</option>
+                <option value="Carioca">Feijão Carioca</option>
+            </select>
+        </div>
+
+        <p id="acompanhamentos_exec"></p>
+
+        {% elif tipo_pedido == 'galeto' %}
+        <label for="tipo_galeto">Selecione o Tipo de Galeto:</label>
+        <select name="tipo_galeto" id="tipo_galeto" required>
+            <option value="" selected disabled>Selecione o tipo de galeto</option>
+            <option value="simples">Simples - R$ 40,00</option>
+            <option value="meio">Meio Galeto - R$ 25,00</option>
+            <option value="completo">Completo - R$ 50,00</option>
+        </select>
+
+        <!-- O feijão só é obrigatório para os tipos de galeto que não sejam simples -->
+        <div id="feijao_div_galeto" style="display: none;">
+            <label for="feijao">Selecione o Feijão:</label>
+            <select name="feijao" id="feijao_galeto" required>
+                <option value="" selected disabled>Selecione o feijão</option>
+                <option value="Preto">Feijão Preto</option>
+                <option value="Carioca">Feijão Carioca</option>
+            </select>
+        </div>
+
+        <p id="acompanhamentos_galeto">Acompanhamentos:</p>
+
+        {% endif %}
+
+        <!-- Adicionar checkbox para observações -->
+        <label for="observacao_checkbox">
+            <input type="checkbox" id="observacao_checkbox" name="observacao_checkbox"> Adicionar observação
+        </label>
+        <div id="observacao_div" style="display: none;">
+            <label for="observacao">Observação:</label>
+            <textarea id="observacao" name="observacao" placeholder="Ex: Sem acompanhamentos, adicionar molho extra..."></textarea>
+        </div>
+
+        <!-- Botão para adicionar mais pedidos -->
+        <button type="submit">Proximo</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Campo de observação
+            const checkboxObservacao = document.getElementById('observacao_checkbox');
+            const observacaoDiv = document.getElementById('observacao_div');
+
+            checkboxObservacao.addEventListener('change', function() {
+                observacaoDiv.style.display = checkboxObservacao.checked ? 'block' : 'none';
+            });
+
+            // Lógica para prato executivo
+            const pratoExecutivo = document.getElementById('prato_executivo');
+            const feijaoDivExecutivo = document.getElementById('feijao_div_executivo');
+            const feijaoExecutivo = document.getElementById('feijao_executivo');
+            const acompanhamentosExec = document.getElementById('acompanhamentos_exec');
+
+            pratoExecutivo.addEventListener('change', function() {
+                const selectedValue = pratoExecutivo.value;
+
+                if (selectedValue.includes('parmegiana')) {
+                    feijaoDivExecutivo.style.display = 'none'; // Ocultar o feijão para parmegiana
+                    feijaoExecutivo.removeAttribute('required'); // Não é obrigatório
+                    acompanhamentosExec.innerText = "Acompanhamentos: macarrão e batata frita.";
+                } else {
+                    feijaoDivExecutivo.style.display = 'block'; // Mostrar feijão para outros pratos
+                    feijaoExecutivo.setAttribute('required', true); // Obrigatório
+                    acompanhamentosExec.innerText = "Acompanhamentos: arroz, macarrão, farofa, vinagrete e batata frita.";
+                }
+            });
+
+            // Lógica para tipo de galeto
+            const tipoGaleto = document.getElementById('tipo_galeto');
+            const feijaoDivGaleto = document.getElementById('feijao_div_galeto');
+            const feijaoGaleto = document.getElementById('feijao_galeto');
+
+            tipoGaleto.addEventListener('change', function() {
+                const selectedGaleto = tipoGaleto.value;
+
+                if (selectedGaleto === 'simples') {
+                    feijaoDivGaleto.style.display = 'none'; // Ocultar o feijão para galeto simples
+                    feijaoGaleto.removeAttribute('required'); // Não é obrigatório
+                } else {
+                    feijaoDivGaleto.style.display = 'block'; // Mostrar feijão para galeto meio/completo
+                    feijaoGaleto.setAttribute('required', true); // Obrigatório
+                }
+            });
+        });
+    </script>
+
+{% elif page == 'pagamento' %}
+{% include 'forma_pagamento.html' %}
+
+
+
+{% elif page == 'confirmacao_pagamento' %}
+    <!-- Incluir o conteúdo de pg2.html -->
+    {% include 'pg2.html' %}
+    {% elif page == 'status_pedido' %}
+    {% include 'pg2.html' %}
+{% elif page == 'historico' %}
+    {% include 'pg2.html' %}
+
+
+
+
+
+</div>
+{% endif %}
+
+
+
+</body>
+</html>

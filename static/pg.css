@@ -1,0 +1,136 @@
+/* Estilo para o bloco de detalhes do pedido */
+#detalhes-pedido {
+    background-color: #f5e3d2 !important;
+    border: 1px solid #d97d54 !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    max-width: 600px !important;
+    margin: 20px auto !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+li {
+    color: #c2674b !important;
+}
+
+.titulo-pedido {
+    color: #d97d54 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    margin-bottom: 15px !important;
+}
+
+.lista-pedido {
+    list-style-type: none !important;
+    padding: 0 !important;
+}
+
+.item-cliente, .item-pedido {
+    font-size: 18px !important;
+    color: #333 !important;
+    margin-bottom: 10px !important;
+}
+
+.observacao {
+    font-weight: bold !important;
+    color: #d97d54 !important;
+}
+
+/* Estilo para o formulário de pagamento */
+.form-pagamento {
+    background-color: #fff4e6 !important;
+    border: 1px solid #d97d54 !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    max-width: 600px !important;
+    margin: 20px auto !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.titulo-forma-pagamento {
+    color: #d97d54 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    margin-bottom: 15px !important;
+}
+
+.label-forma-pagamento,
+.label-troco,
+.label-valor-troco,
+.label-pagador-pix {
+    font-size: 18px !important;
+    color: #333 !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+.select-forma-pagamento,
+.input-valor-troco,
+.input-pagador-pix {
+    width: 100% !important;
+    padding: 10px !important;
+    font-size: 16px !important;
+    border: 1px solid #d97d54 !important;
+    border-radius: 5px !important;
+    margin-bottom: 15px !important;
+}
+
+.troco-pergunta,
+.pix-instrucao {
+    font-size: 18px !important;
+    color: #333 !important;
+    margin-bottom: 10px !important;
+}
+
+.pix-dados {
+    background-color: #fbe7d0 !important;
+    padding: 10px !important;
+    border-radius: 5px !important;
+    font-size: 18px !important;
+    color: #d97d54 !important;
+    margin-bottom: 15px !important;
+}
+
+/* Container para alinhar os botões lado a lado */
+.btn-container {
+    display: flex !important;
+    justify-content: space-between !important;  /* Coloca os botões lado a lado */
+    gap: 10px !important;
+    margin-top: 20px !important;
+}
+
+/* Botão de finalizar pagamento */
+.btn-finalizar {
+    background-color: #d97d54 !important;
+    color: #fff !important;
+    font-size: 18px !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    flex: 1 !important;
+    text-align: center !important;
+}
+
+.btn-finalizar:hover {
+    background-color: #c2674b !important;
+}
+
+/* Botão de cancelar pedido */
+.btn-cancelar {
+    background-color: #e0e0e0 !important;  /* Cor neutra */
+    color: #757575 !important;  /* Texto em cinza */
+    font-size: 18px !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    flex: 1 !important;
+    text-align: center !important;
+}
+
+.btn-cancelar:hover {
+    background-color: #c2c2c2 !important;  /* Cor neutra mais escura no hover */
+}

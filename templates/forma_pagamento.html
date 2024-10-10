@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pg.css') }}">
+</head>
+<body><div id="detalhes-pedido" class="detalhes-pedido">
+    <h3 class="titulo-pedido">Detalhes do Pedido</h3>
+    <ul class="lista-pedido">
+        <li class="item-cliente">Nome do Cliente: {{ pedido.usuario.nome }}</li>
+        <li class="item-cliente">Endereço para entregar: {{ pedido.usuario.endereco }}</li>
+        <li id="tipo-pedido" class="item-pedido">Tipo de Pedido: {{ pedido.tipo_pedido }} 
+            {% if pedido.tipo_pedido == 'Galeto' %}
+                {% if pedido.tipo_galeto == 'meio' %} Meio Galeto
+                {% elif pedido.tipo_galeto == 'completo' %} Galeto Completo
+                {% elif pedido.tipo_galeto %} {{ pedido.tipo_galeto }}
+                {% endif %}
+                {% if pedido.feijao %} / {{ pedido.feijao }} {% endif %}
+            {% else %}
+                {% if pedido.carne %} {{ pedido.carne }} {% endif %}
+                {% if pedido.feijao %} / {{ pedido.feijao }} {% endif %}
+            {% endif %}
+        </li>
+        <li id="quantidade-pedido" class="item-pedido">Quantidade: {{ pedido.quantidade }}</li>
+        <li id="valor-pedido" class="item-pedido">Valor do Pedido: R$ {{ pedido.total }}</li>
+        <li id="taxa-entrega" class="item-pedido">Taxa de Entrega: R$ 5.00</li>
+        <li id="total-pedido" class="item-pedido">Total a Pagar: R$ {{ pedido.total + 5 }}</li>
+        {% if pedido.observacao %}
+            <b><li id="observacao-pedido" class="item-pedido observacao">Observação: {{ pedido.observacao }}</li></b>
+        {% endif %}
+    </ul>
+</div>
+
+    <!-- Formulário para pagamento e cancelamento -->
+<form action="" method="POST" id="form-pagamento" class="form-pagamento">
+    <h3 class="titulo-forma-pagamento">Forma de Pagamento</h3>
+    
+    <label for="forma_pagamento" class="label-forma-pagamento">Selecione a forma de pagamento:</label>
+    <select name="forma_pagamento" id="forma_pagamento" class="select-forma-pagamento" required>
+        <option value="" selected disabled>Selecione a forma de pagamento</option>
+        <option value="dinheiro">Dinheiro</option>
+        <option value="cartao">Cartão</option>
+        <option value="pix">Pix</option>
+    </select>
+
+    <div id="troco" class="troco" style="display:none;">
+        <p class="troco-pergunta">Precisa de troco?</p>
+        <label for="precisa_troco_sim" class="label-troco">
+            <input type="radio" id="precisa_troco_sim" name="precisa_troco" value="sim"> Sim
+        </label>
+        <label for="precisa_troco_nao" class="label-troco">
+            <input type="radio" id="precisa_troco_nao" name="precisa_troco" value="nao" checked> Não
+        </label>
+        <div id="valor_troco_div" class="valor-troco" style="display:none;">
+            <label for="valor_troco" class="label-valor-troco">Troco para quanto?</label>
+            <input type="number" id="valor_troco" name="troco" min="1" placeholder="R$ 100,00" class="input-valor-troco">
+        </div>
+    </div>
+
+    <div id="pix_info" class="pix-info" style="display:none;">
+        <p class="pix-instrucao">Faça o pagamento utilizando o seguinte Pix:</p>
+        <p class="pix-dados"><strong>PIX da empresa:</strong> 1234-5678</p>
+        <label for="nome_pagador_pix" class="label-pagador-pix">Nome do responsável pelo Pix:</label>
+        <input type="text" id="nome_pagador_pix" name="nome_pagador_pix" class="input-pagador-pix">
+    </div>
+
+    <!-- Contêiner com os botões de pagamento e cancelamento lado a lado -->
+    <div class="btn-container">
+        <button type="submit" class="btn-finalizar">Finalizar Pagamento</button>
+        
+        <!-- Botão de cancelar pedido separado dentro do mesmo formulário -->
+        <button type="button" class="btn-cancelar" onclick="document.getElementById('cancel-form').submit();">Cancelar Pedido</button>
+    </div>
+</form>
+
+<!-- Formulário separado apenas para cancelar o pedido (invisível) -->
+<form id="cancel-form" action="/cancelar_pedido/{{ pedido.id }}" method="POST" style="display:none;">
+</form>
+
+<!-- JavaScript para controlar a exibição dos campos de pagamento -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const formaPagamento = document.getElementById('forma_pagamento');
+        const trocoDiv = document.getElementById('troco');
+        const valorTrocoDiv = document.getElementById('valor_troco_div');
+        const precisaTrocoSim = document.getElementById('precisa_troco_sim');
+        const precisaTrocoNao = document.getElementById('precisa_troco_nao');
+        const pixInfo = document.getElementById('pix_info');
+
+        // Exibir ou ocultar os campos com base na forma de pagamento selecionada
+        formaPagamento.addEventListener('change', function() {
+            const forma = formaPagamento.value;
+            trocoDiv.style.display = forma === 'dinheiro' ? 'block' : 'none';
+            pixInfo.style.display = forma === 'pix' ? 'block' : 'none';
+
+            if (forma !== 'dinheiro') {
+                valorTrocoDiv.style.display = 'none';
+                precisaTrocoSim.checked = false;
+                precisaTrocoNao.checked = true;
+            }
+        });
+
+        // Mostrar campo de valor do troco apenas se o usuário escolher "Sim"
+        precisaTrocoSim.addEventListener('change', function() {
+            valorTrocoDiv.style.display = precisaTrocoSim.checked ? 'block' : 'none';
+        });
+    });
+</script>

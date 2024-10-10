@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/admin.css">
+    <title>Área de Administração</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pedidos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Cliente</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Quantidade</th>
+                <th>Pedido</th>
+                <th>Forma de Pagamento</th>
+                <th>Status</th>
+                <th>Alterar Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr>
+                <td>{{ pedido.usuario.nome }}</td>
+                <td>{{ pedido.usuario.telefone }}</td>
+                <td>{{ pedido.usuario.endereco }}</td>
+                <td> Quantidade: {{ pedido.quantidade }}</td>
+
+                <td>
+                    {% if pedido.tipo_pedido == 'Galeto' %}
+                        {% if pedido.tipo_galeto == 'meio' %}
+                            Meio Galeto
+                        {% elif pedido.tipo_galeto == 'completo' %}
+                            Galeto Completo
+                        {% elif pedido.tipo_galeto %}
+                            {{ pedido.tipo_galeto }}
+                        {% endif %}
+                        {% if pedido.feijao %}
+                            /Feijão {{ pedido.feijao }}
+                        {% endif %}
+                    {% else %}
+                        {% if pedido.carne %}
+                            {{ pedido.carne }}
+                        {% endif %}
+                        {% if pedido.feijao %}
+                            /Feijão {{ pedido.feijao }}
+                        {% endif %}
+                    {% endif %}
+                    
+                    <!-- Exibe a observação se existir -->
+                    {% if pedido.observacao %}
+                        <br><strong>Observação:</strong> {{ pedido.observacao }}
+                    {% endif %}
+                </td>
+
+                <!-- Forma de Pagamento -->
+                <td>
+                    {{ pedido.forma_pagamento }}
+                    {% if pedido.forma_pagamento == 'dinheiro' and pedido.precisa_troco == 'sim' %}
+                        <br>Troco para: R$ {{ pedido.troco_para }}
+                    {% endif %}
+                </td>
+
+                <td>{{ pedido.status }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('alterar_status_ajax', pedido_id=pedido.id) }}">
+                        <select name="status">
+                            <option value="Recebido" {% if pedido.status == 'Recebido' %} selected {% endif %}>Recebido</option>
+                            <option value="Em preparação" {% if pedido.status == 'Em preparação' %} selected {% endif %}>Em preparação</option>
+                            <option value="Saiu para entrega" {% if pedido.status == 'Saiu para entrega' %} selected {% endif %}>Saiu para entrega</option>
+                            <option value="Entregue" {% if pedido.status == 'Entregue' %} selected {% endif %}>Entregue</option>
+                        </select><button type="submit">Atualizar Status</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

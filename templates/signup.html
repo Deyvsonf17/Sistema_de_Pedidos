@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="/signup">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" name="nome" id="nome" required>
+
+            <label for="endereco">Endereço:</label>
+            <textarea name="endereco" id="endereco" required></textarea>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" name="telefone" id="telefone" required>
+
+            <label for="username">Nome de Usuário:</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" name="password" id="password" required>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já tem uma conta? <a href="/login">Faça login aqui</a>.</p>
+    </div>
+</body>
+</html>
